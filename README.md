@@ -15,5 +15,8 @@ Version 11/9/22
 - Created 2 boolean variables endSwitch and restartSwitch to end the program while playing.
 The user can also restart the game mid-game if the user wanted to have a fresh start.
 - Created an if and else if statement to change the values of endSwitch and restartSwitch.
-- Fixed the hangmanPrint() bug by adding breaks.
-- Need to implement the ASCII so the user can't use numbers and symbols.
+- Created a game message using print statements, from line 32 to 38.
+- Updated the if statement checking the input variable. It's now checking if the input length is over 1, is it 
+end or restart.
+- In the else statement of the input length check it converts the input string to a char then to an int (ascii)
+then checks to see if the input is in the ascii range.
