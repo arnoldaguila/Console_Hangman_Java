@@ -20,13 +20,14 @@ public class ConsoleHangman {
             boolean win = false; //for winning and losing message.
             boolean endSwitch = false;
             boolean restartSwitch = false;
-            int chances = 6;//6 chances cause there are 6 body parts. Head, body, left arm, right arm, left leg, right leg.
+            int chances = 6;//6 chances cause there are 6 body parts. Head, body, left arm, right arm, left leg,
+                            //right leg.
             String secretWord = getWord("word_bank.txt");
             String og = secretWord; // saving original word
             secretWord = secretWord.toLowerCase(); // setting secretWord to lower for gaming purposes.
             LinkedList<String> blankLinesArray = new LinkedList<>();
-            for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the secret word.
-                blankLinesArray.add("_");
+            for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the
+                blankLinesArray.add("_");                //secret word.
             }
 
             // Game message.
