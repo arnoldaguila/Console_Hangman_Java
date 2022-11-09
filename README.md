@@ -7,3 +7,4 @@ Version 11/8/22
 - Created the ConsoleHangman class; getWord, blankLinesPrint, and hangmanPrint methods.
 - Created win boolean to print a win or lose message.
 - Found a bug for the inputs. It messes with the variable chances and the hangmanPrint method.
+- Need to test for more bugs.
