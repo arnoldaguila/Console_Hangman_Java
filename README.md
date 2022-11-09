@@ -1,4 +1,4 @@
-# Console_Hangman
+# Console_Hangman_Java
 Java remake of my python console Hangman game. (Semi-complete just need to test more to find more bugs.)
 
 Version 11/8/22
