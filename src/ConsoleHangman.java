@@ -75,9 +75,12 @@ public class ConsoleHangman {
         }
 
         if(win){ // win loss messages.
-            System.out.println("You Win!");
+            System.out.println();
+            System.out.println("YOU WIN!");
         }else{
-            System.out.println(("You lost."));
+            System.out.println();
+            hangmanPrint(chances);
+            System.out.println(("You lose."));
         }
     }
 
@@ -120,7 +123,7 @@ public class ConsoleHangman {
     /**
      * hangmanPrint()
      * This static method prints out the gallow and the hangman.
-     * @param chances
+     * @param chances int
      */
     public static void hangmanPrint(int chances){
         switch (chances){
@@ -131,6 +134,7 @@ public class ConsoleHangman {
                 System.out.println("|");
                 System.out.println("|");
                 System.out.println("|");
+                break;
             case 5:
                 System.out.println("___________");
                 System.out.println("|         |");
@@ -138,6 +142,7 @@ public class ConsoleHangman {
                 System.out.println("|");
                 System.out.println("|");
                 System.out.println("|");
+                break;
             case 4:
                 System.out.println("___________");
                 System.out.println("|         |");
@@ -145,6 +150,7 @@ public class ConsoleHangman {
                 System.out.println("|         |");
                 System.out.println("|");
                 System.out.println("|");
+                break;
             case 3:
                 System.out.println("___________");
                 System.out.println("|         |");
@@ -152,6 +158,7 @@ public class ConsoleHangman {
                 System.out.println("|        /|");
                 System.out.println("|");
                 System.out.println("|");
+                break;
             case 2:
                 System.out.println("___________");
                 System.out.println("|         |");
@@ -159,6 +166,7 @@ public class ConsoleHangman {
                 System.out.println("|        /|\\");
                 System.out.println("|");
                 System.out.println("|");
+                break;
             case 1:
                 System.out.println("___________");
                 System.out.println("|         |");
@@ -173,6 +181,7 @@ public class ConsoleHangman {
                 System.out.println("|        /|\\");
                 System.out.println("|        / \\");
                 System.out.println("|");
+                break;
         }
     }
 
