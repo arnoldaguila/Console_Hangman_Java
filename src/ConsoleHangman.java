@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Arnold Aguila
  * @version 11/8/22
  */
-public class Hangman {
+public class ConsoleHangman {
     public static void main(String[] args) {
         ArrayList<Character> guessedLetters = new ArrayList<>();
         int chances = 6;
@@ -31,7 +31,7 @@ public class Hangman {
             char letter = input.charAt(0);
             if(guessedLetters.contains(letter)){
                 chances--;
-                
+
 
             }
         }
