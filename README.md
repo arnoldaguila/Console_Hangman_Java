@@ -1,5 +1,5 @@
 # Console_Hangman
-Remake of my console Hangman in python (Work in progress)
+Remake of my console Hangman in python
 
 Version 11/8/22
 
