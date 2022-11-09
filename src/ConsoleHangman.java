@@ -14,73 +14,104 @@ import java.util.Scanner;
  */
 public class ConsoleHangman {
     public static void main(String[] args) {
-        Scanner userInput = new Scanner(System.in);
-        ArrayList<String> guessedLettersBefore = new ArrayList<>(); // Array for the guessed letters
-        boolean win = false; //for winning and losing message.
-        int chances = 6;//6 chances cause there are 6 body parts. Head, body, left arm, right arm, left leg, right leg.
-        String secretWord = getWord("word_bank.txt");
-        LinkedList<String> blankLinesArray = new LinkedList<>();
-        for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the secret word.
-            blankLinesArray.add("_");
-        }
-        System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
-
         while(true){
-            hangmanPrint(chances); // prints the gallow and the hangman.
-            System.out.println(blankLinesPrint(blankLinesArray));
-            System.out.println("Chances left: " + chances);
-            System.out.println();
-            System.out.print("Enter a letter: ");
-            String input = userInput.nextLine();
-            input = input.toLowerCase();
-            input = input.replace(" ", "");
-            if (input.length() > 1){ //if input was more than one letter
-                System.out.println("Error: Can't input more then 1 letter.");
-            }else{
-                if(guessedLettersBefore.contains(input)){ //if letter is in the guessedLettersBefore array.
-                    System.out.println("You already guess that letter.");
-                    chances = chances - 1;
-                    if(chances == 0){
-                        break;
-                    }
+            Scanner userInput = new Scanner(System.in);
+            ArrayList<String> guessedLettersBefore = new ArrayList<>(); // Array for the guessed letters
+            boolean win = false; //for winning and losing message.
+            boolean endSwitch = false;
+            boolean restartSwitch = false;
+            int chances = 6;//6 chances cause there are 6 body parts. Head, body, left arm, right arm, left leg, right leg.
+            String secretWord = getWord("word_bank.txt");
+            String og = secretWord; // saving original word
+            secretWord = secretWord.toLowerCase(); // setting secretWord to lower for gaming purposes.
+            LinkedList<String> blankLinesArray = new LinkedList<>();
+            for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the secret word.
+                blankLinesArray.add("_");
+            }
+//        System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
+
+            while(true){
+                hangmanPrint(chances); // prints the gallow and the hangman.
+                System.out.println(blankLinesPrint(blankLinesArray));
+                System.out.println("Chances left: " + chances);
+                System.out.println();
+                System.out.print("Enter a letter: ");
+                String input = userInput.nextLine();
+                input = input.toLowerCase();
+                input = input.replace(" ", "");
+                if(input.equals("end")){
+                    endSwitch = true;
+                    break;
+                } else if (input.equals("restart")) {
+                    restartSwitch = true;
+                    break;
+                } else if (input.length() > 1){ //if input was more than one letter
+                    System.out.println("Error: Can't input more then 1 letter.");
                 }else{
-                    if(secretWord.contains(input)){ //if letter is in the secretWord
-                        guessedLettersBefore.add(input);
-                        //Nested for loop to check if input string matches with the letter of the secretWord than
-                        //gets the index of secretWord's letter that matched with input and uses it for the
-                        //blankLinesArray set method and changes a blank line with the input letter.
-                        for(int i = 0; i < input.length(); i++){
-                            for(int j = 0; j < secretWord.length(); j++){
-                                if (input.charAt(i) == secretWord.charAt(j)){
-                                    blankLinesArray.set(j, input);
-                                }
-                            }
-                        }
-                        if (blankLinesPrint(blankLinesArray).equals(secretWord)){
-                            win = true;
-                            break;
-                        }
-                    }else {
+                    if(guessedLettersBefore.contains(input)){ //if letter is in the guessedLettersBefore array.
+                        System.out.println("You already guess that letter.");
                         chances = chances - 1;
                         if(chances == 0){
                             break;
-                        }else{
-                            guessedLettersBefore.add(input);
-                            System.out.println();
                         }
+                    }else{
+                        if(secretWord.contains(input)){ //if letter is in the secretWord
+                            guessedLettersBefore.add(input);
+                            //Nested for loop to check if input string matches with the letter of the secretWord than
+                            //gets the index of secretWord's letter that matched with input and uses it for the
+                            //blankLinesArray set method and changes a blank line with the input letter.
+                            for(int i = 0; i < input.length(); i++){
+                                for(int j = 0; j < secretWord.length(); j++){
+                                    if (input.charAt(i) == secretWord.charAt(j)){
+                                        blankLinesArray.set(j, input);
+                                    }
+                                }
+                            }
+                            if (blankLinesPrint(blankLinesArray).equals(secretWord)){
+                                win = true;
+                                break;
+                            }
+                        }else {
+                            chances = chances - 1;
+                            if(chances == 0){
+                                break;
+                            }else{
+                                guessedLettersBefore.add(input);
+                                System.out.println();
+                            }
 
+                        }
                     }
                 }
             }
-        }
 
-        if(win){ // win loss messages.
-            System.out.println();
-            System.out.println("YOU WIN!");
-        }else{
-            System.out.println();
-            hangmanPrint(chances);
-            System.out.println(("You lose."));
+            if (endSwitch == false && restartSwitch == false){
+                if(win){ // win loss messages.
+                    System.out.println(og);
+                    System.out.println();
+                    System.out.println("YOU WIN!");
+                }else{
+                    System.out.println();
+                    hangmanPrint(chances);
+                    System.out.printf("The word was %s.%n", og);
+                    System.out.println(("You lose."));
+                }
+                System.out.println();
+                System.out.println("Do you want to play again?");
+                System.out.println("Enter Yes or No: ");
+                String onOff = userInput.nextLine();
+                onOff = onOff.toLowerCase();
+                onOff = onOff.replace(" ", "");
+                if (onOff.equals("no")){
+                    System.out.println("Ending program.");
+                    break;
+                }
+            }else if (restartSwitch == true && endSwitch == false){
+                continue;
+            }else{
+                System.out.println("Ending program.");
+                break;
+            }
         }
     }
 
@@ -134,6 +165,7 @@ public class ConsoleHangman {
                 System.out.println("|");
                 System.out.println("|");
                 System.out.println("|");
+                System.out.println("------");
                 break;
             case 5:
                 System.out.println("___________");
@@ -142,6 +174,7 @@ public class ConsoleHangman {
                 System.out.println("|");
                 System.out.println("|");
                 System.out.println("|");
+                System.out.println("------");
                 break;
             case 4:
                 System.out.println("___________");
@@ -150,6 +183,7 @@ public class ConsoleHangman {
                 System.out.println("|         |");
                 System.out.println("|");
                 System.out.println("|");
+                System.out.println("------");
                 break;
             case 3:
                 System.out.println("___________");
@@ -158,6 +192,7 @@ public class ConsoleHangman {
                 System.out.println("|        /|");
                 System.out.println("|");
                 System.out.println("|");
+                System.out.println("------");
                 break;
             case 2:
                 System.out.println("___________");
@@ -166,6 +201,7 @@ public class ConsoleHangman {
                 System.out.println("|        /|\\");
                 System.out.println("|");
                 System.out.println("|");
+                System.out.println("------");
                 break;
             case 1:
                 System.out.println("___________");
@@ -174,6 +210,8 @@ public class ConsoleHangman {
                 System.out.println("|        /|\\");
                 System.out.println("|        /");
                 System.out.println("|");
+                System.out.println("------");
+                break;
             case 0:
                 System.out.println("___________");
                 System.out.println("|         |");
@@ -181,6 +219,7 @@ public class ConsoleHangman {
                 System.out.println("|        /|\\");
                 System.out.println("|        / \\");
                 System.out.println("|");
+                System.out.println("------");
                 break;
         }
     }
