@@ -30,13 +30,7 @@ public class ConsoleHangman {
                 blankLinesArray.add("_");                //secret word.
             }
 
-            // Game message.
-            System.out.println();
-            System.out.println("This is a hangman console game. When prompted please enter a letter.");
-            System.out.println("You can type 'end' + the enter button to shut down the game early or type in");
-            System.out.println("'restart' + the enter button to restart the game if you want to restart mid-game.");
-            System.out.println("Good Luck :)");
-            System.out.println();
+            gameMessage(); // Game message.
 //        System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
 
             while(true){
@@ -249,5 +243,14 @@ public class ConsoleHangman {
                 System.out.println("------");
                 break;
         }
+    }
+
+    public static void gameMessage(){
+        System.out.println();
+        System.out.println("This is a hangman console game. When prompted please enter a letter.");
+        System.out.println("You can type 'end' + the enter button to shut down the game early or type in");
+        System.out.println("'restart' + the enter button to restart the game if you want to restart mid-game.");
+        System.out.println("Good Luck :)");
+        System.out.println();
     }
 }
