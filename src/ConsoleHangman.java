@@ -59,7 +59,9 @@ public class ConsoleHangman {
                 String input = userInput.nextLine();
                 input = input.toLowerCase();
                 input = input.replaceAll("\\s", "");
-                if (input.length() > 1){ //if input was more than one letter
+                if(input.equals("")){
+                    System.out.println("Error: You didn't enter a letter.");
+                }else if (input.length() > 1){ //if input was more than one letter
                     if(input.equals("end")){ //checking to see if the input is end.
                         endSwitch = true;
                         break;
