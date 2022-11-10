@@ -85,9 +85,6 @@ public class ConsoleHangman {
                         }else{
                             if(secretWord.contains(input)){ //if letter is in the secretWord
                                 guessedLettersBefore.add(input);
-                                //Nested for loop to check if input string matches with the letter of the secretWord than
-                                //gets the index of secretWord's letter that matched with input and uses it for the
-                                //blankLinesArray set method and changes a blank line with the input letter.
                                 for(int i = 0; i < input.length(); i++){
                                     for(int j = 0; j < secretWord.length(); j++){
                                         if (input.charAt(i) == secretWord.charAt(j)){
@@ -131,6 +128,7 @@ public class ConsoleHangman {
                 String onOff = userInput.nextLine();
                 onOff = onOff.toLowerCase();
                 onOff = onOff.replace("\\s", "");
+
                 if (onOff.equals("no")){
                     System.out.println("Ending program.");
                     break;
