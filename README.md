@@ -20,3 +20,4 @@ The user can also restart the game mid-game if the user wanted to have a fresh s
 end or restart.
 - In the else statement of the input length check it converts the input string to a char then to an int (ascii)
 then checks to see if the input is in the ascii range.
+- Implemented a guessed letters print at the top of the hangmanPrint static method call at line 43 to 53.

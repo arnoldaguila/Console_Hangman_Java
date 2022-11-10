@@ -40,6 +40,17 @@ public class ConsoleHangman {
 //        System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
 
             while(true){
+                if (guessedLettersBefore.size() != 0){ // printing the guessed letters array.
+                    String guessedLettersBeforePrint = "{";
+                    for(int i = 0; i < guessedLettersBefore.size(); i++){
+                        if (i != guessedLettersBefore.size() - 1){
+                            guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "',";
+                        }else {
+                            guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "'}";
+                        }
+                    }
+                    System.out.println("Guessed letters -> " + guessedLettersBeforePrint);
+                }
                 hangmanPrint(chances); // prints the gallow and the hangman.
                 System.out.println(blankLinesPrint(blankLinesArray));
                 System.out.println("Chances left: " + chances);
@@ -82,6 +93,7 @@ public class ConsoleHangman {
                                         }
                                     }
                                 }
+                                System.out.println();
                                 if (blankLinesPrint(blankLinesArray).equals(secretWord)){
                                     win = true;
                                     break;
@@ -100,7 +112,7 @@ public class ConsoleHangman {
                 }
             }
 
-            if (endSwitch == false && restartSwitch == false){
+            if (!endSwitch){
                 if(win){ // win loss messages.
                     System.out.println(og);
                     System.out.println();
@@ -121,7 +133,7 @@ public class ConsoleHangman {
                     System.out.println("Ending program.");
                     break;
                 }
-            }else if (restartSwitch == true && endSwitch == false){
+            }else if (restartSwitch){
                 System.out.println("Restarting Program.");
             }else{
                 System.out.println("Ending program.");
@@ -238,5 +250,4 @@ public class ConsoleHangman {
                 break;
         }
     }
-
 }
