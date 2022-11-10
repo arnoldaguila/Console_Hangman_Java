@@ -127,7 +127,7 @@ public class ConsoleHangman {
                 }
                 System.out.println();
                 System.out.println("Do you want to play again?");
-                System.out.print("Enter Yes or No: ");
+                System.out.print("Enter No to quit: ");
                 String onOff = userInput.nextLine();
                 onOff = onOff.toLowerCase();
                 onOff = onOff.replace("\\s", "");
