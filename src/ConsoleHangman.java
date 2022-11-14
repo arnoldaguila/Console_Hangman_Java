@@ -245,6 +245,10 @@ public class ConsoleHangman {
         }
     }
 
+    /**
+     * gameMessage()
+     * This method prints out the welcome and controls
+     */
     public static void gameMessage(){
         System.out.println();
         System.out.println("This is a hangman console game. When prompted please enter a letter.");
