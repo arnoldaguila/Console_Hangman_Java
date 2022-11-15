@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
@@ -138,6 +139,7 @@ public class ConsoleHangmanV2 {
 
         System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
 
+        ArrayList<Character> guessBank = new ArrayList<>();
         while (true){
             String guess = userInput.next();
             guess = guess.toLowerCase();
@@ -151,7 +153,14 @@ public class ConsoleHangmanV2 {
                     System.out.println("Error can't enter more than one letter.");
                 }
             }else{
+                char letter = guess.charAt(0);
+                int ascii = letter;
+                if (ascii < 97 || ascii > 122){
+                    System.out.println("Error: invalid entry please enter a letter.");
+                }else if (guessBank.contains(letter)){
+                    System.out.println("Error: you've guessed this letter before.");
 
+                }
             }
         }
 
