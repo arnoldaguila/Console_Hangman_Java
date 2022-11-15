@@ -138,15 +138,21 @@ public class ConsoleHangmanV2 {
 
         System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
 
-        String guess = userInput.next();
-        guess = guess.toLowerCase();
-        guess = guess.replace("\\s", "");
-        if (guess.equals("end")){
-            return; // stop's method
-        }else if(guess.equals("restart")){
-            game(); // recurse to restart.
-        }else{
+        while (true){
+            String guess = userInput.next();
+            guess = guess.toLowerCase();
+            guess = guess.replace("\\s", "");
+            if(guess.length() > 1){
+                if (guess.equals("end")){
+                    return; // stop's method
+                }else if(guess.equals("restart")){
+                    game(); // recurse to restart.
+                }else{
+                    System.out.println("Error can't enter more than one letter.");
+                }
+            }else{
 
+            }
         }
 
     }
