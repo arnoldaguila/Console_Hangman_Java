@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -121,6 +119,10 @@ public class ConsoleHangmanV2 {
         }
     }
 
+    /**
+     * gameMessage()
+     * This method just prints a Welcoming message and the controls of the program.
+     */
     public static void gameMessage(){
         System.out.println();
         System.out.println("This is a hangman console game. When prompted please enter a letter.");
@@ -130,12 +132,18 @@ public class ConsoleHangmanV2 {
         System.out.println();
     }
 
+    /**
+     * game()
+     * This method is the entire game.
+     */
     public static void game(){
         Scanner userInput = new Scanner(System.in);
         String secretWord = getWord("word_bank.txt");
         secretWord = secretWord.toLowerCase(); // setting secretWord to lower for game purposes.
         secretWord = secretWord.replace("\\s", "");
         String hiddenWord= blankLines(secretWord);
+        char[] secretWordArray = secretWord.toCharArray(); // creating a char array to see if the letter guessed is in the secret word.
+        int chances = 6; // number of chances since there are six different body parts that are in the hangman game.
 
         System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
 
@@ -159,13 +167,23 @@ public class ConsoleHangmanV2 {
                     System.out.println("Error: invalid entry please enter a letter.");
                 }else if (guessBank.contains(letter)){
                     System.out.println("Error: you've guessed this letter before.");
+                }else{
+                    guessBank.add(letter);
+                    if (){
 
+                    }
                 }
             }
         }
 
     }
 
+    /**
+     * blankLines()
+     * This method creates a string of underscores that has the same length as the secret word.
+     * @param secretWord String
+     * @return blankLines String
+     */
     public static String blankLines(String secretWord){
         String blankLines = "";
         for (int i = 0; i < secretWord.length(); i++){
