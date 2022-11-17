@@ -18,6 +18,18 @@ public class ConsoleHangman {
         game(); // running game.
     }
 
+
+    /**
+     * cleanUp()
+     * This method sets the input string to lower case and removes all spaces.
+     * @param user_input
+     */
+    public static String cleanUp(String user_input){
+        user_input = user_input.toLowerCase();
+        return user_input.replace("\\s","");
+    }
+
+
     /**
      * getWord()
      * This static method gets random word from a txt file.
@@ -264,16 +276,6 @@ public class ConsoleHangman {
                 System.out.println("Error: Invalid Input. Enter Yes or No.");
             }
         }
-    }
-
-    /**
-     * cleanUp()
-     * This method sets the input string to lower case and removes all spaces.
-     * @param user_input
-     */
-    public static String cleanUp(String user_input){
-        user_input = user_input.toLowerCase();
-        return user_input.replace("\\s","");
     }
 
     /**
