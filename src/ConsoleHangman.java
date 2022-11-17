@@ -161,6 +161,7 @@ public class ConsoleHangman {
         ArrayList<String> guessedLettersBefore = new ArrayList<>(); // Array for the guessed letters
         int chances = 6; // number of body parts and chances.
         String secretWord = getWord("word_bank.txt");
+        String og = secretWord;
         secretWord = cleanUp(secretWord);
         LinkedList<String> blankLinesArray = new LinkedList<>();
         for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the
@@ -189,6 +190,11 @@ public class ConsoleHangman {
                     System.out.println();
                     System.out.println("Restarting game.");
                     game();
+                } else if (input.equals(secretWord)) {
+                    System.out.println();
+                    System.out.printf("The word is %s! Great Job.%n", og);
+                    win();
+                    return;
                 } else { // if neither end | restart print error message.
                     System.out.println("Error: Can't input more then 1 letter.");
                 }
