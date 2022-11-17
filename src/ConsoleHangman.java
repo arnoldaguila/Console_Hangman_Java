@@ -22,7 +22,7 @@ public class ConsoleHangman {
     /**
      * cleanUp()
      * This method sets the input string to lower case and removes all spaces.
-     * @param user_input
+     * @param user_input String
      */
     public static String cleanUp(String user_input){
         user_input = user_input.toLowerCase();
@@ -33,7 +33,7 @@ public class ConsoleHangman {
     /**
      * getWord()
      * This static method gets random word from a txt file.
-     * @param file
+     * @param file String
      * @return RANDOM: String,
      */
     public static String getWord(String file){
@@ -55,7 +55,7 @@ public class ConsoleHangman {
     /**
      * blankLinesPrint()
      * This static method gets a LinkedList String argument and returns a String.
-     * @param blankLines LinkedList String,
+     * @param blankLines LinkedList
      * @return output String
      */
     public static String blankLinesPrint(LinkedList<String> blankLines){
@@ -152,6 +152,10 @@ public class ConsoleHangman {
         System.out.println();
     }
 
+    /**
+     * game()
+     * This static method houses the engine for hangman.
+     */
     public static void game(){
         Scanner userInput = new Scanner(System.in);
         ArrayList<String> guessedLettersBefore = new ArrayList<>(); // Array for the guessed letters
