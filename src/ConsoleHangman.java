@@ -146,8 +146,8 @@ public class ConsoleHangman {
     public static void gameMessage(){
         System.out.println();
         System.out.println("This is a hangman console game. When prompted please enter a letter.");
-        System.out.println("You can type 'end' + the enter button to shut down the game early or type in");
-        System.out.println("'restart' + the enter button to restart the game if you want to restart mid-game.");
+        System.out.println("You can type 'end' to end the game, 'restart' to restart the game, or try your shot at the secret word fully spelled out.");
+        System.out.println("You can type 'end', 'restart', or the secret word at any time during the game.");
         System.out.println("Good Luck :)");
         System.out.println();
     }
