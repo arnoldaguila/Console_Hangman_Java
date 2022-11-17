@@ -14,126 +14,8 @@ import java.util.Scanner;
  */
 public class ConsoleHangman {
     public static void main(String[] args) {
-        while(true){
-            Scanner userInput = new Scanner(System.in);
-            ArrayList<String> guessedLettersBefore = new ArrayList<>(); // Array for the guessed letters
-            boolean win = false; //for winning and losing message.
-            boolean endSwitch = false;
-            boolean restartSwitch = false;
-            int chances = 6;//6 chances cause there are 6 body parts. Head, body, left arm, right arm, left leg,
-                            //right leg.
-            String secretWord = getWord("word_bank.txt");
-            String og = secretWord; // saving original word
-            secretWord = secretWord.toLowerCase(); // setting secretWord to lower for gaming purposes.
-            LinkedList<String> blankLinesArray = new LinkedList<>();
-            for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the
-                blankLinesArray.add("_");                //secret word.
-            }
-
-            gameMessage(); // Game message.
-//        System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
-
-            while(true){
-                if (guessedLettersBefore.size() != 0){ // printing the guessed letters array.
-                    String guessedLettersBeforePrint = "{";
-                    for(int i = 0; i < guessedLettersBefore.size(); i++){
-                        if (i != guessedLettersBefore.size() - 1){
-                            guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "',";
-                        }else {
-                            guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "'}";
-                        }
-                    }
-                    System.out.println("Guessed letters -> " + guessedLettersBeforePrint);
-                }
-                hangmanPrint(chances); // prints the gallow and the hangman.
-                System.out.println(blankLinesPrint(blankLinesArray));
-                System.out.println("Chances left: " + chances);
-                System.out.println();
-                System.out.print("Enter a letter: ");
-                String input = userInput.nextLine();
-                input = input.toLowerCase();
-                input = input.replaceAll("\\s", "");
-                if(input.equals("")){
-                    System.out.println("Error: You didn't enter a letter.");
-                }else if (input.length() > 1){ //if input was more than one letter
-                    if(input.equals("end")){ //checking to see if the input is end.
-                        endSwitch = true;
-                        break;
-                    }else if (input.equals("restart")) { //checking to see if input is restart.
-                        restartSwitch = true;
-                        break;
-                    }else{ // if neither end | restart print error message.
-                        System.out.println("Error: Can't input more then 1 letter.");
-                    }
-                }else{
-                    int ascii = input.charAt(0);
-                    if ((ascii < 97) || (ascii > 122)){
-                        System.out.println("Error invalid input. please enter a letter.");
-                    }else{
-                        if(guessedLettersBefore.contains(input)){ //if letter is in the guessedLettersBefore array.
-                            System.out.println("You already guess that letter.");
-                            chances = chances - 1;
-                            if(chances == 0){
-                                break;
-                            }
-                        }else{
-                            if(secretWord.contains(input)){ //if letter is in the secretWord
-                                guessedLettersBefore.add(input);
-                                for(int i = 0; i < input.length(); i++){
-                                    for(int j = 0; j < secretWord.length(); j++){
-                                        if (input.charAt(i) == secretWord.charAt(j)){
-                                            blankLinesArray.set(j, input);
-                                        }
-                                    }
-                                }
-                                System.out.println();
-                                if (blankLinesPrint(blankLinesArray).equals(secretWord)){
-                                    win = true;
-                                    break;
-                                }
-                            }else {
-                                chances = chances - 1;
-                                if(chances == 0){
-                                    break;
-                                }else{
-                                    guessedLettersBefore.add(input);
-                                    System.out.println();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!endSwitch){
-                if(win){ // win loss messages.
-                    System.out.println(og);
-                    System.out.println();
-                    System.out.println("YOU WIN!");
-                }else{
-                    System.out.println();
-                    hangmanPrint(chances);
-                    System.out.printf("The word was %s.%n", og);
-                    System.out.println(("You lose."));
-                }
-                System.out.println();
-                System.out.println("Do you want to play again?");
-                System.out.print("Enter No to quit: ");
-                String onOff = userInput.nextLine();
-                onOff = onOff.toLowerCase();
-                onOff = onOff.replace("\\s", "");
-
-                if (onOff.equals("no")){
-                    System.out.println("Ending program.");
-                    break;
-                }
-            }else if (restartSwitch){
-                System.out.println("Restarting Program.");
-            }else{
-                System.out.println("Ending program.");
-                break;
-            }
-        }
+        gameMessage(); // running game message
+        game(getWord("word_bank")); // running game.
     }
 
     /**
@@ -257,4 +139,115 @@ public class ConsoleHangman {
         System.out.println("Good Luck :)");
         System.out.println();
     }
+
+    public static void game(String word){
+        Scanner userInput = new Scanner(System.in);
+        ArrayList<String> guessedLettersBefore = new ArrayList<>(); // Array for the guessed letters
+        int chances = 6; // number of body parts and chances.
+        String secretWord = word;
+        secretWord = cleanUp(secretWord);
+        LinkedList<String> blankLinesArray = new LinkedList<>();
+        for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the
+            blankLinesArray.add("_");                //secret word.
+        }
+//        System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
+        while(true) {
+            guessedLettersArray(guessedLettersBefore);
+            hangmanPrint(chances); // prints the gallow and the hangman.
+            System.out.println(blankLinesPrint(blankLinesArray));
+            System.out.println("Chances left: " + chances);
+            System.out.println();
+            System.out.print("Enter a letter: ");
+            String input = userInput.nextLine();
+            input = input.toLowerCase();
+            input = input.replaceAll("\\s", "");
+            if (input.equals("")) {
+                System.out.println("Error: You didn't enter a letter.");
+            } else if (input.length() > 1) { //if input was more than one letter
+                if (input.equals("end")) { //checking to see if the input is end.
+                    endSwitch = true;
+                    break;
+                } else if (input.equals("restart")) { //checking to see if input is restart.
+                    restartSwitch = true;
+                    break;
+                } else { // if neither end | restart print error message.
+                    System.out.println("Error: Can't input more then 1 letter.");
+                }
+            } else {
+                int ascii = input.charAt(0);
+                if ((ascii < 97) || (ascii > 122)) {
+                    System.out.println("Error invalid input. please enter a letter.");
+                } else {
+                    if (guessedLettersBefore.contains(input)) { //if letter is in the guessedLettersBefore array.
+                        System.out.println("You already guess that letter.");
+                        chances = chances - 1;
+                        if (chances == 0) {
+                            loss();
+                            break;
+                        }
+                    } else {
+                        if (secretWord.contains(input)) { //if letter is in the secretWord
+                            guessedLettersBefore.add(input);
+                            for (int i = 0; i < input.length(); i++) {
+                                for (int j = 0; j < secretWord.length(); j++) {
+                                    if (input.charAt(i) == secretWord.charAt(j)) {
+                                        blankLinesArray.set(j, input);
+                                    }
+                                }
+                            }
+                            System.out.println();
+                            if (blankLinesPrint(blankLinesArray).equals(secretWord)) {
+                                win();
+                                break;
+                            }
+                        } else {
+                            chances = chances - 1;
+                            if (chances == 0) {
+                                break;
+                            } else {
+                                guessedLettersBefore.add(input);
+                                System.out.println();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
+    public static void win(){
+        Scanner user_input = new Scanner(System.in);
+        System.out.println("You won!");
+        System.out.print("Do you want to play again?");
+        String answer = user_input.next();
+        answer = cleanUp(answer);
+    }
+
+    /**
+     * cleanUp()
+     * This method sets the input string to lower case and removes all spaces.
+     * @param user_input
+     */
+    public static String cleanUp(String user_input){
+        user_input = user_input.toLowerCase();
+        return user_input.replace(" ","");
+    }
+
+    public static void guessedLettersArray(ArrayList<String> guessedLettersBefore){
+        if (guessedLettersBefore.size() != 0) { // printing the guessed letters array.
+            String guessedLettersBeforePrint = "{";
+            for (int i = 0; i < guessedLettersBefore.size(); i++) {
+                if (i != guessedLettersBefore.size() - 1) {
+                    guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "',";
+                } else {
+                    guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "'}";
+                }
+            }
+            System.out.println("Guessed letters -> " + guessedLettersBeforePrint);
+        }
+    }
+
 }
