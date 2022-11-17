@@ -178,8 +178,12 @@ public class ConsoleHangman {
                 System.out.println("Error: You didn't enter a letter.");
             } else if (input.length() > 1) { //if input was more than one letter
                 if (input.equals("end")) { //checking to see if the input is end.
+                    System.out.println();
+                    System.out.println("Ending game.");
                     return;
                 } else if (input.equals("restart")) { //checking to see if input is restart.
+                    System.out.println();
+                    System.out.println("Restarting game.");
                     game();
                 } else { // if neither end | restart print error message.
                     System.out.println("Error: Can't input more then 1 letter.");
