@@ -168,7 +168,7 @@ public class ConsoleHangman {
                     endSwitch = true;
                     break;
                 } else if (input.equals("restart")) { //checking to see if input is restart.
-                    restartSwitch = true;
+
                     break;
                 } else { // if neither end | restart print error message.
                     System.out.println("Error: Can't input more then 1 letter.");
