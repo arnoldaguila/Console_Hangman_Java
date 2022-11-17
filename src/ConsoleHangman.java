@@ -285,7 +285,7 @@ public class ConsoleHangman {
     /**
      * guessedLettersArray()
      * This static method prints out the guessed letters
-     * @param guessedLettersBefore
+     * @param guessedLettersBefore ArrayList
      */
     public static void guessedLettersArray(ArrayList<String> guessedLettersBefore){ // printing the guessed letters array.
         if (guessedLettersBefore.size() != 0) { // if the ArrayList is empty don't print anything out.
