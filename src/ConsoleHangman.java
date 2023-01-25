@@ -40,15 +40,18 @@ public class ConsoleHangman {
         Scanner input = null;
         try{
             input = new Scanner(new File(file));
-        }catch (FileNotFoundException e){
+        }//try
+        catch (FileNotFoundException e){
             System.out.println("Can't find the file yo.");
-        }
+        }//catch
         ArrayList<String> wordArray = new ArrayList<>();
         while(input.hasNextLine()){
-            wordArray.add(input.nextLine()); // reading file and adding to an ArrayList
-        }
+            // reading file and adding to an ArrayList
+            wordArray.add(input.nextLine());
+        }//while
         input.close();
-        return wordArray.get(randInt.nextInt(0, wordArray.size())); // returning a random word from the ArrayList.
+        // returning a random word from the ArrayList.
+        return wordArray.get(randInt.nextInt(0, wordArray.size()));
     }
 
     /**
@@ -61,9 +64,9 @@ public class ConsoleHangman {
         String output = "";
         for(int i = 0; i < blankLines.size(); i++){
             output = output + blankLines.get(i);
-        }
+        }//for
         return output;
-    }
+    }//blankLinesPrint
 
     /**
      * hangmanPrint()
@@ -135,8 +138,8 @@ public class ConsoleHangman {
                 System.out.println("|");
                 System.out.println("------");
                 break;
-        }
-    }
+        }//switch
+    }//hangmanPrint
 
     /**
      * gameMessage()
@@ -149,7 +152,7 @@ public class ConsoleHangman {
         System.out.println("You can type 'end', 'restart', or the secret word at any time during the game.");
         System.out.println("Good Luck :)");
         System.out.println();
-    }
+    }//gameMessage
 
     /**
      * game()
@@ -175,10 +178,14 @@ public class ConsoleHangman {
 
         while(true){
             System.out.println();
-            guessedLettersArray(guessedLettersBefore); // printing out the letters that are guessed.
-            hangmanPrint(chances); // print the gallows and the hangman.
-            System.out.println(blankLinesPrint(blankLinesArray)); // printing out the blank lines
-            System.out.println("Chances left: " + chances); // printing out how many guesses the user has left.
+            // printing out the letters that are guessed.
+            guessedLettersArray(guessedLettersBefore);
+            // print the gallows and the hangman.
+            hangmanPrint(chances);
+            // printing out the blank lines
+            System.out.println(blankLinesPrint(blankLinesArray));
+            // printing out how many guesses the user has left.
+            System.out.println("Chances left: " + chances);
             System.out.println();
             System.out.print("Enter a letter: ");
             String input = userInput.nextLine();
@@ -272,17 +279,20 @@ public class ConsoleHangman {
             answer = cleanUp(answer);
             if (answer.equals("")){
                 System.out.println("Error: Invalid Input. Enter Yes or No.");
-            } else if (answer.equals("yes")) {
+            }//if
+            else if (answer.equals("yes")) {
                 System.out.println("Restarting game.");
                 game();
-            } else if (answer.equals("no")) {
+            }//else if
+            else if (answer.equals("no")) {
                 System.out.println("Ending game");
                 break;
-            }else {
+            }//else if
+            else {
                 System.out.println("Error: Invalid Input. Enter Yes or No.");
-            }
-        }
-    }
+            }//else
+        }//while
+    }//win
 
     /**
      * loss()
@@ -299,20 +309,23 @@ public class ConsoleHangman {
             if (answer.equals("")){
                 System.out.println();
                 System.out.println("Error: Invalid Input. Enter Yes or No.");
-            } else if (answer.equals("yes")) {
+            }//if
+            else if (answer.equals("yes")) {
                 System.out.println();
                 System.out.println("Restarting game.");
                 game();
-            } else if (answer.equals("no")) {
+            }//else if
+            else if (answer.equals("no")) {
                 System.out.println();
                 System.out.println("Ending game");
                 break;
-            }else {
+            }//else if
+            else {
                 System.out.println();
                 System.out.println("Error: Invalid Input. Enter Yes or No.");
-            }
-        }
-    }
+            }//else
+        }//while
+    }//loss
 
     /**
      * guessedLettersArray()
@@ -325,12 +338,13 @@ public class ConsoleHangman {
             for (int i = 0; i < guessedLettersBefore.size(); i++) {
                 if (i != guessedLettersBefore.size() - 1) {
                     guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "',";
-                } else {
+                }//if
+                else {
                     guessedLettersBeforePrint = guessedLettersBeforePrint + "'" + guessedLettersBefore.get(i) + "'}";
-                }
-            }
+                }//else
+            }//for
             System.out.println("Guessed letters -> " + guessedLettersBeforePrint);
-        }
-    }
+        }//if
+    }//guessedLettersArray
 
-}
+}// ConsoleHangMan
