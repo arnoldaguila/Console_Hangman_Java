@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-
 /**
  * ConsoleHangman
  * This is the ConsoleHangman class it contains a static main and getWord methods.
@@ -158,21 +157,26 @@ public class ConsoleHangman {
      */
     public static void game(){
         Scanner userInput = new Scanner(System.in);
-        ArrayList<String> guessedLettersBefore = new ArrayList<>(); // Array for the guessed letters
-        int chances = 6; // number of body parts and chances.
+        // Array for the guessed letters
+        ArrayList<String> guessedLettersBefore = new ArrayList<>();
+        // number of body parts and chances.
+        int chances = 6;
         String secretWord = getWord("word_bank.txt");
         String og = secretWord;
         secretWord = cleanUp(secretWord);
         LinkedList<String> blankLinesArray = new LinkedList<>();
-        for(int i = 0; i < secretWord.length(); i++){//adding blank lines for the number of letters in the
-            blankLinesArray.add("_");                //secret word.
-        }
+        //adding blank lines for the number of letters in the
+        for(int i = 0; i < secretWord.length(); i++){
+            //secret word.
+            blankLinesArray.add("_");
+        }//for
+
 //        System.out.println("Not supposed to be here: " + secretWord); //HERE FOR TESTING PURPOSE.
 
         while(true){
             System.out.println();
             guessedLettersArray(guessedLettersBefore); // printing out the letters that are guessed.
-            hangmanPrint(chances); // prints the gallow and the hangman.
+            hangmanPrint(chances); // print the gallows and the hangman.
             System.out.println(blankLinesPrint(blankLinesArray)); // printing out the blank lines
             System.out.println("Chances left: " + chances); // printing out how many guesses the user has left.
             System.out.println();
@@ -181,60 +185,78 @@ public class ConsoleHangman {
             input = cleanUp(input);
             if (input.equals("")) {
                 System.out.println("Error: You didn't enter a letter.");
-            } else if (input.length() > 1) { //if input was more than one letter
-                if (input.equals("end")) { //checking to see if the input is end.
+            }//if
+            //if input was more than one letter
+            else if (input.length() > 1) {
+                //checking to see if the input is end.
+                if (input.equals("end")) {
                     System.out.println();
                     System.out.println("Ending game.");
                     return;
-                } else if (input.equals("restart")) { //checking to see if input is restart.
+                }//if
+                //checking to see if input is restart.
+                else if (input.equals("restart")) {
                     System.out.println();
                     System.out.println("Restarting game.");
                     game();
-                } else if (input.equals(secretWord)) {
+                }//else if
+                else if (input.equals(secretWord)) {
                     System.out.println();
                     System.out.printf("The word is %s! Great Job.%n", og);
                     win();
                     return;
-                } else { // if neither end | restart print error message.
+                }//else if
+                else {
+                    // if neither end | restart print error message.
                     System.out.println("Error: Can't input more then 1 letter.");
-                }
+                }//else
             } else {
                 int ascii = input.charAt(0);
-                if ((ascii < 97) || (ascii > 122)) { // checking to see if the input is a letter.
+                // checking to see if the input is a letter.
+                if ((ascii < 97) || (ascii > 122)) {
                     System.out.println("Error invalid input. Please enter a letter.");
-                } else {
-                    if (guessedLettersBefore.contains(input)) { //if letter has been guessed before.
+                }//else
+                else {
+                    //if letter has been guessed before.
+                    if (guessedLettersBefore.contains(input)) {
                         System.out.println("You already guess that letter.");
-                    }else{
-                        if (secretWord.contains(input)) { //if letter is in the secretWord
+                    }//if
+                    else{
+                        //if letter is in the secretWord
+                        if (secretWord.contains(input)) {
                             guessedLettersBefore.add(input);
                             for (int i = 0; i < input.length(); i++) {
                                 for (int j = 0; j < secretWord.length(); j++) {
                                     if (input.charAt(i) == secretWord.charAt(j)) {
-                                        blankLinesArray.set(j, input); // updating blank lines when the user guesses correctly
-                                    }
-                                }
-                            }
+                                        //updating blank lines when the user guesses correctly
+                                        blankLinesArray.set(j, input);
+                                    }//if
+                                }//for
+                            }//for
+
+                            // printing a blank line
                             System.out.println();
+                            // if all the blank lines are equal to the secret word then the user wins.
                             if (blankLinesPrint(blankLinesArray).equals(secretWord)) {
                                 win();
                                 return;
-                            }
+                            }//if
                         } else {
                             chances = chances - 1;
                             if (chances == 0) {
                                 loss(secretWord);
                                 return;
-                            } else {
+                            }//if
+                            else {
                                 guessedLettersBefore.add(input);
                                 System.out.println();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+                            }//else
+                        }//else
+                    }//else
+                }//else
+            }//else
+        }//while
+    }//game
 
 
     /**
